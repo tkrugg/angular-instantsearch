@@ -3,7 +3,7 @@
 set -e # exit when error
 
 yarn
-yarn build
+yarn build -- --source-map
 
 (
   cd examples/$1
@@ -19,5 +19,5 @@ yarn build
   mkdir -p ./node_modules/instantsearch.js
   cp -R ../../node_modules/instantsearch.js/* ./node_modules/instantsearch.js
 
-  ./node_modules/.bin/ng build --prod --base-href "."
+  ./node_modules/.bin/ng build --prod --source-map --base-href "."
 )
