@@ -41,11 +41,11 @@ export type BreadcrumbItem = {
             *ngIf="!item.isLast"
             (click)="handleClick($event, item)"
           >
-            {{item.name}}
+            {{item.label}}
           </a>
 
           <span *ngIf="item.isLast">
-            {{item.name}}
+            {{item.label}}
           </span>
         </li>
       </ul>
@@ -68,6 +68,8 @@ export class NgAisBreadcrumb extends BaseWidget {
       ...item,
       separator: idx !== 0,
       isLast: idx === this.state.items.length - 1,
+      // FIXME: get rid of this. We can use `last` local variable
+      // https://angular.io/api/common/NgForOf#local-variables
     }));
   }
 
