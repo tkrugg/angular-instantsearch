@@ -5,10 +5,16 @@ import { BaseWidget } from '../base-widget';
 import { NgAisInstantSearch } from '../instantsearch/instantsearch';
 import { noop } from '../utils';
 
+export type NumericMenuItem = {
+  label: string;
+  value: string;
+  isRefined: boolean;
+};
 export type NumericRefinementListState = {
   createURL: Function;
-  items: {}[];
+  items: NumericMenuItem[];
   refine: Function;
+  hasNoResults?: boolean;
 };
 
 @Component({
@@ -40,17 +46,13 @@ export type NumericRefinementListState = {
 })
 export class NgAisNumericMenu extends BaseWidget {
   @Input() public attribute: string;
-  @Input()
-  public items: {
-    name: string;
-    start?: number;
-    end?: number;
-  }[];
+  @Input() public items: { label: string; start?: number; end?: number }[];
+  // TODO: add transformItem
 
   public state: NumericRefinementListState = {
-    createURL: noop,
     items: [],
     refine: noop,
+    createURL: noop,
   };
 
   get isHidden() {
@@ -66,8 +68,8 @@ export class NgAisNumericMenu extends BaseWidget {
 
   public ngOnInit() {
     this.createWidget(connectNumericMenu, {
-      attributeName: this.attribute,
-      options: this.items,
+      attribute: this.attribute,
+      items: this.items,
     });
     super.ngOnInit();
   }
