@@ -93,7 +93,8 @@
     "algoliasearch-helper": "^2.26.1",
     "lodash": "^4.17.10",
     "nouislider": "^10.0.0",
-    "querystring-es3": "^0.2.1"
+    "querystring-es3": "^0.2.1",
+    "instantsearch.js": "^3.0.0"
   },
   "devDependencies": {
     "@angular/common": "5.2.11",
@@ -148,7 +149,6 @@
     "@angular/common": ">=5.0.0 <8.0.0",
     "@angular/core": ">=5.0.0 <8.0.0",
     "@angular/platform-browser": ">=5.0.0 <8.0.0",
-    "@angular/platform-browser-dynamic": ">=5.0.0 <8.0.0",
-    "instantsearch.js": "^3.0.0"
+    "@angular/platform-browser-dynamic": ">=5.0.0 <8.0.0"
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, Inject, forwardRef } from '@angular/core';
 
-import { connectNumericRefinementList } from 'instantsearch.js/es/connectors';
+import { connectNumericMenu } from 'instantsearch.js/es/connectors';
 import { BaseWidget } from '../base-widget';
 import { NgAisInstantSearch } from '../instantsearch/instantsearch';
 import { noop } from '../utils';
@@ -65,7 +65,7 @@ export class NgAisNumericMenu extends BaseWidget {
   }
 
   public ngOnInit() {
-    this.createWidget(connectNumericRefinementList, {
+    this.createWidget(connectNumericMenu, {
       attributeName: this.attribute,
       options: this.items,
     });

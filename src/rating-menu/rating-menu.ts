@@ -1,6 +1,6 @@
 import { Component, Input, Inject, forwardRef } from '@angular/core';
 
-import { connectStarRating } from 'instantsearch.js/es/connectors';
+import { connectRatingMenu } from 'instantsearch.js/es/connectors';
 import { BaseWidget } from '../base-widget';
 import { NgAisInstantSearch } from '../instantsearch/instantsearch';
 import { noop } from '../utils';
@@ -102,7 +102,7 @@ export class NgAisRatingMenu extends BaseWidget {
   }
 
   public ngOnInit() {
-    this.createWidget(connectStarRating, {
+    this.createWidget(connectRatingMenu, {
       attributeName: this.attribute,
       max: this.max,
     });

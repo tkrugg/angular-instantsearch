@@ -1,6 +1,6 @@
 import { Component, Input, Inject, forwardRef } from '@angular/core';
 
-import { connectSortBySelector } from 'instantsearch.js/es/connectors';
+import { connectSortBy } from 'instantsearch.js/es/connectors';
 import { BaseWidget } from '../base-widget';
 import { NgAisInstantSearch } from '../instantsearch/instantsearch';
 import { noop } from '../utils';
@@ -50,7 +50,7 @@ export class NgAisSortBy extends BaseWidget {
   }
 
   public ngOnInit() {
-    this.createWidget(connectSortBySelector, { indices: this.items });
+    this.createWidget(connectSortBy, { indices: this.items });
     super.ngOnInit();
   }
 }

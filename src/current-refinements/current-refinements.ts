@@ -1,6 +1,6 @@
 import { Component, Input, Inject, forwardRef } from '@angular/core';
 
-import { connectCurrentRefinedValues } from 'instantsearch.js/es/connectors';
+import { connectCurrentRefinements } from 'instantsearch.js/es/connectors';
 import { BaseWidget } from '../base-widget';
 import { NgAisInstantSearch } from '../instantsearch/instantsearch';
 import { noop, capitalize } from '../utils';
@@ -119,7 +119,7 @@ export class NgAisCurrentRefinements extends BaseWidget {
   }
 
   public ngOnInit() {
-    this.createWidget(connectCurrentRefinedValues, {
+    this.createWidget(connectCurrentRefinements, {
       attributes: this.attributes,
       clearsQuery: this.clearsQuery,
       onlyListedAttributes: this.onlyListedAttributes,
