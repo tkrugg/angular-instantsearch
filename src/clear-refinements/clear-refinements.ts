@@ -25,12 +25,12 @@ export class NgAisClearRefinements extends BaseWidget {
   @Input() public resetLabel: string = 'Clear refinements';
   @Input() public includedAttributes: string[] = [];
   @Input() public excludeAttributes: string[] = [];
-  @Input()
-  public transformItems: (items: object[]) => object[] = items => items;
+  // TODO: add transformItems
 
   public state = {
     hasRefinements: false,
     refine: noop,
+    // add createURL
   };
 
   get isHidden() {
@@ -48,7 +48,6 @@ export class NgAisClearRefinements extends BaseWidget {
     this.createWidget(connectClearRefinements, {
       includedAttributes: this.includedAttributes,
       excludeAttributes: this.excludeAttributes,
-      transformItems: this.transformItems,
     });
 
     super.ngOnInit();
