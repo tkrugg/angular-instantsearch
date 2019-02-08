@@ -91,8 +91,6 @@
   "dependencies": {
     "algoliasearch": "^3.29.0",
     "algoliasearch-helper": "^2.26.1",
-    "instantsearch.css": "^7.0.0",
-    "instantsearch.js": "^2.8.0",
     "lodash": "^4.17.10",
     "nouislider": "^10.0.0",
     "querystring-es3": "^0.2.1"
@@ -143,12 +141,14 @@
     "tslint-config-prettier": "1.17.0",
     "tslint-plugin-prettier": "2.0.1",
     "typescript": "3.2.4",
-    "zone.js": "0.8.28"
+    "zone.js": "0.8.28",
+    "instantsearch.css": "^7.0.0"
   },
   "peerDependencies": {
     "@angular/common": ">=5.0.0 <8.0.0",
     "@angular/core": ">=5.0.0 <8.0.0",
     "@angular/platform-browser": ">=5.0.0 <8.0.0",
-    "@angular/platform-browser-dynamic": ">=5.0.0 <8.0.0"
+    "@angular/platform-browser-dynamic": ">=5.0.0 <8.0.0",
+    "instantsearch.js": "^3.0.0"
   }
 }
