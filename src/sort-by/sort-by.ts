@@ -5,6 +5,17 @@ import { BaseWidget } from '../base-widget';
 import { NgAisInstantSearch } from '../instantsearch/instantsearch';
 import { noop } from '../utils';
 
+export type SortByItem = {
+  name: string;
+  label: string;
+};
+
+export type SortByState = {
+  currentRefinement: string | null;
+  options: SortByItem[];
+  refine: Function;
+};
+
 @Component({
   selector: 'ais-sort-by',
   template: `
@@ -26,17 +37,10 @@ import { noop } from '../utils';
   `,
 })
 export class NgAisSortBy extends BaseWidget {
-  @Input()
-  public items: {
-    name: string;
-    label: string;
-  }[];
+  @Input() public items: SortByItem[];
+  // TODO: add transformItems
 
-  public state: {
-    currentRefinement: string | null;
-    options: {}[];
-    refine: Function;
-  } = {
+  public state: SortByState = {
     currentRefinement: null,
     options: [],
     refine: noop,
