@@ -5,10 +5,18 @@ import { BaseWidget } from '../base-widget';
 import { NgAisInstantSearch } from '../instantsearch/instantsearch';
 import { noop } from '../utils';
 
+export type RatingMenuItem = {
+  count: number;
+  isRefined: boolean;
+  name: string;
+  value: string;
+  stars: boolean[];
+};
+
 export type RatingMenuState = {
   createURL: Function;
   hasNoResults: boolean;
-  items: {}[];
+  items: RatingMenuItem[];
   refine: Function;
 };
 
@@ -81,7 +89,7 @@ export class NgAisRatingMenu extends BaseWidget {
 
   // connectors options
   @Input() public attribute: string;
-  @Input() public max?: number = 5;
+  @Input() public max?: number;
 
   public state: RatingMenuState = {
     createURL: noop,
@@ -103,7 +111,7 @@ export class NgAisRatingMenu extends BaseWidget {
 
   public ngOnInit() {
     this.createWidget(connectRatingMenu, {
-      attributeName: this.attribute,
+      attribute: this.attribute,
       max: this.max,
     });
     super.ngOnInit();
