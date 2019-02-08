@@ -8,17 +8,25 @@ import { noop } from '../utils';
 export type ToggleState = {
   createURL: Function;
   refine: Function;
-  value: {
-    name?: string;
+  value?: {
+    name: string;
     count?: number;
     isRefined?: boolean;
+    onFacetValue: {
+      isRefined: boolean;
+      count: number;
+    };
+    offFacetValue: {
+      isRefined: boolean;
+      count: number;
+    };
   };
 };
 
 @Component({
   selector: 'ais-toggle',
   template: `
-    <div [class]="cx()">
+    <div [class]="cx()" *ngIf="state.value">
       <ul [class]="cx('list')">
         <li
           [class]="cx('item')"
@@ -43,16 +51,16 @@ export type ToggleState = {
   `,
 })
 export class NgAisToggle extends BaseWidget {
+  @Input() public label: string;
+
   // connector options
   @Input() public attribute: string;
-  @Input() public label: string;
-  @Input()
-  public values: { on?: boolean; off?: boolean } = { on: true, off: undefined };
+  @Input() on: boolean | number | string = true;
+  @Input() off: boolean | number | string = undefined;
 
   public state: ToggleState = {
     createURL: noop,
     refine: noop,
-    value: {},
   };
 
   constructor(
@@ -64,9 +72,9 @@ export class NgAisToggle extends BaseWidget {
 
   public ngOnInit() {
     this.createWidget(connectToggleRefinement, {
-      attributeName: this.attribute,
-      label: this.label,
-      values: this.values,
+      attribute: this.attribute,
+      on: this.on,
+      off: this.off,
     });
     super.ngOnInit();
   }
