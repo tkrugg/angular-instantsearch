@@ -4,7 +4,7 @@ const req = require.context('../src/stories/', true, /\.stories\.ts$/);
 
 function loadStories() {
   [
-    // './Breadcrumb.stories.ts',
+    './Breadcrumb.stories.ts',
 
     // './ClearRefinements.stories.ts',
     // './Configure.stories.ts',
