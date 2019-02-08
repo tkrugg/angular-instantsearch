@@ -6,7 +6,7 @@ import { NgAisInstantSearch } from '../instantsearch/instantsearch';
 import { noop } from '../utils';
 
 export type SortByItem = {
-  name: string;
+  value: string;
   label: string;
 };
 
@@ -54,7 +54,7 @@ export class NgAisSortBy extends BaseWidget {
   }
 
   public ngOnInit() {
-    this.createWidget(connectSortBy, { indices: this.items });
+    this.createWidget(connectSortBy, { items: this.items });
     super.ngOnInit();
   }
 }
