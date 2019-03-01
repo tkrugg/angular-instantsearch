@@ -59,6 +59,8 @@ export { parseServerRequest };
 // Custom widget with BaseWidget class
 import { BaseWidget, Widget, Connector } from './base-widget';
 export { BaseWidget, Widget, Connector };
+import { ObservableBaseWidget } from './observable-base-widget';
+export { ObservableBaseWidget };
 
 import { NgAisInstantSearch } from './instantsearch/instantsearch';
 export { NgAisInstantSearch };

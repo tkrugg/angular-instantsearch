@@ -1,30 +1,41 @@
-import { Component, OnInit, Inject, forwardRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  forwardRef,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import {
   BaseWidget,
+  ObservableBaseWidget,
   NgAisInstantSearch,
   Widget,
   Connector,
 } from 'angular-instantsearch';
 import { connectMenu } from 'instantsearch.js/es/connectors';
+import { fromEvent, Observable } from 'rxjs';
+import { pluck, map, withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'ais-menu-select',
   template: `
-    <select
-      class="menu-select"
-      (change)="state.refine($event.target.value)"
-    >
-      <option
-        *ngFor="let item of state.items"
-        [value]="item.value"
-        [selected]="item.isRefined"
-      >
-        {{item.label}}
-      </option>
-    </select>
+      <select #select>
+        <option 
+          *ngFor="let item of items$ | async" 
+          value="{{item.value}}" 
+        >
+          {{ item.label }}
+        </option>
+      </select>
   `,
 })
-export class MenuSelect extends BaseWidget implements OnInit {
+export class MenuSelect extends ObservableBaseWidget implements OnInit {
+  @ViewChild('select') select: ElementRef;
+  public items$: Observable<
+    { value: string; label: string; isRefined: boolean; count: number }[]
+  >;
+
   constructor(
     @Inject(forwardRef(() => NgAisInstantSearch))
     public instantSearchParent
@@ -35,6 +46,17 @@ export class MenuSelect extends BaseWidget implements OnInit {
   public ngOnInit() {
     this.createWidget(connectMenu, { attribute: 'categories' });
     super.ngOnInit();
+
+    // expose items to template
+    this.items$ = this.state$.pipe(pluck('items'));
+
+    // call refine on select value change
+    fromEvent(this.select.nativeElement, 'change')
+      .pipe(map((e: MouseEvent) => (e.target as HTMLSelectElement).value))
+      .pipe(withLatestFrom(this.state$))
+      .subscribe(([value, state]) => {
+        state.refine(value);
+      });
   }
 }
 
